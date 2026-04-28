@@ -1,0 +1,15 @@
+import { Types } from "mongoose";
+
+export class ProductCart{
+    productId!:Types.ObjectId;
+    quantity!:Number;
+}
+
+export class Cart{
+    private readonly _id!: Types.ObjectId;
+
+    userId!: Types.ObjectId;
+
+    products!: ProductCart[];
+
+}
