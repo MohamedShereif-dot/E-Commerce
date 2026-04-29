@@ -6,7 +6,7 @@ export class ProductCart{
 }
 
 export class Cart{
-    private readonly _id!: Types.ObjectId;
+    readonly _id!: Types.ObjectId;
 
     userId!: Types.ObjectId;
 

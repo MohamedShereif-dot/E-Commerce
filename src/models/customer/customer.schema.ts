@@ -11,9 +11,6 @@ export class Customer{
     otpExpiry:Date;
     isVerified:boolean;
 
-    @Prop({type:String})
-    googleId?:string;
-
     @Prop({type:Date})
     dob:Date;
 

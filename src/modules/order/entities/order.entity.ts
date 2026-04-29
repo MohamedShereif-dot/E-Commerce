@@ -38,7 +38,7 @@ export class CouponDetails{
 }
 
 export class Order{
-    private readonly _id;
+    readonly _id!: Types.ObjectId;
 
     userId: Types.ObjectId;
 

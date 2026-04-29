@@ -31,6 +31,18 @@
 $ pnpm install
 ```
 
+Create a `.env` file by copying `.env.example` and filling in your environment values:
+
+```bash
+$ cp .env.example .env
+```
+
+Required environment variables for Google OAuth:
+
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
+- `GOOGLE_CALLBACK_URL`
+
 ## Compile and run the project
 
 ```bash

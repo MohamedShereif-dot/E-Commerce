@@ -15,7 +15,7 @@ import { OrderModule } from './modules/order/order.module';
 
 
 @Module({
-  imports: [ConfigModule.forRoot({ load: [devConfig], isGlobal: true }), MongooseModule.forRootAsync({
+  imports: [ConfigModule.forRoot({ envFilePath: '.env', load: [devConfig], isGlobal: true }), MongooseModule.forRootAsync({
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => ({
       uri: configService.get('db').url as string

@@ -12,7 +12,7 @@ export class ProductCart{
 
 @Schema({timestamps:true})
 export class Cart{
-    private readonly _id!: Types.ObjectId;
+    readonly _id!: Types.ObjectId;
 
     @Prop({type:SchemaTypes.ObjectId,ref:'Customer'})
     userId!: Types.ObjectId;

@@ -1,23 +1,25 @@
 import { Injectable } from "@nestjs/common";
-import { Model, MongooseBaseQueryOptionKeys, ProjectionType, QueryOptions, RootFilterQuery, UpdateQuery } from "mongoose";
+import { Document, Model, MongooseBaseQueryOptionKeys, ProjectionType, QueryOptions, RootFilterQuery, UpdateQuery } from "mongoose";
+
+type EntityDocument<T> = Document<unknown, {}, T> & T;
 
 @Injectable()
 export class AbstractRepository<T> {
     constructor(private readonly model: Model<T>) {
     }
-        public async create(item:Partial<T>){
+        public async create(item:Partial<T>):Promise<EntityDocument<T>>{
             const doc = new this.model(item);
-            return await doc.save();
+            return await doc.save() as unknown as EntityDocument<T>;
         }
 
-        public async getOne(filter:RootFilterQuery<T>,projection?:ProjectionType<T>,options?:QueryOptions):Promise<T | null>{
+        public async getOne(filter:RootFilterQuery<T>,projection?:ProjectionType<T>,options?:QueryOptions):Promise<EntityDocument<T> | null>{
             return await this.model.findOne(filter,projection,options);
         }
-        public async updateOne(filter:RootFilterQuery<T>,updateQuery?:UpdateQuery<T>,options?:QueryOptions):Promise<T | null>{
+        public async updateOne(filter:RootFilterQuery<T>,updateQuery?:UpdateQuery<T>,options?:QueryOptions):Promise<EntityDocument<T> | null>{
             return await this.model.findOneAndUpdate(filter,updateQuery,options);
         }
 
-        public async getAll(filter:RootFilterQuery<T>,projection?:ProjectionType<T>,options?:QueryOptions):Promise<any>{
+        public async getAll(filter:RootFilterQuery<T>,projection?:ProjectionType<T>,options?:QueryOptions):Promise<EntityDocument<T>[]> {
             return await this.model.find(filter,projection,options);
         }
 

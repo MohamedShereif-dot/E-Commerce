@@ -1,29 +1,20 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
-import { GoogleAuthController } from './google-auth.controller';
-import { GoogleAuthService } from './google-auth.service';
-import { Customer, CustomerRepository, customerSchema, User, userSchema } from 'src/models';
-import { MongooseModule } from '@nestjs/mongoose';
-import { UserMongoModule } from 'src/shared';
-import { AuthFactoryService } from './factory';
 import { JwtService } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { GoogleStrategy } from './strategies/google.strategy';
+import { UserMongoModule } from 'src/shared';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { AuthFactoryService } from './factory';
 
 @Module({
   imports:[
     UserMongoModule,
-    PassportModule.register({ defaultStrategy: 'jwt' })
   ],
-  controllers: [AuthController, GoogleAuthController],
+  controllers: [AuthController],
   providers: [
     AuthService,
     AuthFactoryService,
-    JwtService,
-    GoogleAuthService,
-    GoogleStrategy
+    JwtService
   ],
-  exports: [AuthService, AuthFactoryService, JwtService, GoogleAuthService],
+  exports: [AuthService, AuthFactoryService, JwtService],
 })
 export class AuthModule {}

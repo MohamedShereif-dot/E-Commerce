@@ -57,7 +57,7 @@ export class CouponDetail{
 
 @Schema({timestamps:true})
 export class Order{
-    private readonly _id;
+    readonly _id!: Types.ObjectId;
 
     @Prop({type:Types.ObjectId,ref:'User',required:true})
     userId: Types.ObjectId;
